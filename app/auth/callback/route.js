@@ -1,14 +1,19 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabaseServer'
 
+
 export async function GET(request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
   let next = searchParams.get('next') ?? '/'
+
+
+  // Sanea: siempre ruta relativa interna
   if (!next.startsWith('/')) next = '/'
 
+
   if (code) {
-    const supabase = await createClient() // SIN await
+    const supabase = await createClient() // en server: await
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) return NextResponse.redirect(`${origin}${next}`)
   }
