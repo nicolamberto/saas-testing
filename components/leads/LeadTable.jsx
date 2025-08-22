@@ -16,6 +16,10 @@ export default function LeadTable({ leads }) {
                     <th style={th}>Teléfono</th>
                     <th style={th}>Origen</th>
                     <th style={th}>Score</th>
+                    <th style={th}>Segmento</th>
+                    <th style={th}>AI Score</th>
+                    <th style={th}>Tags</th>
+                    <th style={th}>Notas IA</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +31,10 @@ export default function LeadTable({ leads }) {
                         <td style={td}>{l.phone ?? '—'}</td>
                         <td style={td}>{l.source ?? '—'}</td>
                         <td style={td}>{l.score ?? '—'}</td>
+                        <td style={td}>{l.ai_segment ?? '—'}</td>
+                        <td style={td}>{l.ai_score ?? '—'}</td>
+                        <td style={td} className="w-[250px]">{Array.isArray(l.ai_tags) ? l.ai_tags.join(', ') : '—'}</td>
+                        <td style={td} className="w-[350px]">{l.ai_notes ?? '—'}</td>
                     </tr>
                 ))}
             </tbody>
